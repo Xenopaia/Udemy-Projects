@@ -1,14 +1,19 @@
+# This program
+
+
+
 # importing the relevant packages
 from tkinter import *
 
 # creating the empty template for the tic tac toe grid
-positions = {'pos1':' ', 'pos2':' ', 'pos3':' ', 'pos4':' ', 'pos5':' ', 'pos6':' ', 'pos7':' ', 'pos8':' ', 'pos9':' '}
+# to do: make a function out of this, so you don't have to print it again and again!
+positions = {'1':' ', '2':' ', '3':' ', '4':' ', '5':' ', '6':' ', '7':' ', '8':' ', '9':' '}
 
-grid = f'\n {positions["pos1"]} | {positions["pos2"]} | {positions["pos3"]} ' \
+grid = f'\n {positions["1"]} | {positions["2"]} | {positions["3"]} ' \
        '\n----------------' \
-       f'\n {positions["pos4"]} | {positions["pos5"]} | {positions["pos6"]} ' \
+       f'\n {positions["4"]} | {positions["5"]} | {positions["6"]} ' \
        '\n----------------' \
-       f'\n {positions["pos7"]} | {positions["pos8"]} | {positions["pos9"]} '
+       f'\n {positions["7"]} | {positions["8"]} | {positions["9"]} '
 
 #testing it out
 print(grid)
@@ -36,4 +41,56 @@ while charChoice in ['x','X','o','O']:
               break
 
 # 3. where to put X or O
-print(f'{players["x"]}, make your move. (1-9)')
+print("In the following grid, you will place your characters in turn. The numbers indicate the available positions you can pick.")
+gridNumbers = f'\n 1 | 2 | 3 ' \
+       '\n-------------' \
+       f'\n 4 | 5 | 6 ' \
+       '\n-------------' \
+       f'\n 7 | 8 | 9 '
+print(gridNumbers)
+
+# being able to place a move
+i=0
+# missing: not be able to overwrite moves
+# missing: game should end when someone has three in a row, or every field in the grid has been filled
+#      or there are no winning combinations possible anymore
+while i<9:
+       # missing: only numbers should be put in here; try again and again until number is given
+       i += 1
+
+       # player X
+       nextMove = input(f'{players["x"]}, make your move. (1-9)')
+       while nextMove not in range(1,10):
+              nextMove = input("Your input was not a number between 1 and 9. Please input a valid number.")
+              nextMove = {str(nextMove):"X"}
+       else:
+              nextMove = {str(nextMove):"X"}
+
+       # update and print out the grid
+       positions.update(nextMove)
+       grid = f'\n {positions["1"]} | {positions["2"]} | {positions["3"]} ' \
+              '\n----------------' \
+              f'\n {positions["4"]} | {positions["5"]} | {positions["6"]} ' \
+              '\n----------------' \
+              f'\n {positions["7"]} | {positions["8"]} | {positions["9"]} '
+       print(grid)
+
+       # player O
+       nextMove = {input(str(f'{players["o"]}, make your move. (1-9)')):'O'}
+       if nextMove not in range(1,10):
+              nextMove = input("Your input was not a number between 1 and 9. Please input a valid number.")
+              nextMove = {str(nextMove):"O"}
+       else:
+              nextMove = {str(nextMove):"O"}
+
+       # update and print out the grid
+       positions.update(nextMove)
+       grid = f'\n {positions["1"]} | {positions["2"]} | {positions["3"]} ' \
+              '\n----------------' \
+              f'\n {positions["4"]} | {positions["5"]} | {positions["6"]} ' \
+              '\n----------------' \
+              f'\n {positions["7"]} | {positions["8"]} | {positions["9"]} '
+       print(grid)
+
+
+# continue until someone gets three in a row ==> while loop, breaks after condition is met
